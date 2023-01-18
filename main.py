@@ -40,7 +40,7 @@ def test():
     return {"test"}
 
 
-@app.get("/get-excersize/{excercise_id}")
+@app.get("/get-item/{excercise_id}")
 def get_excercize(excercise_id: int = Path(None, description="The id of the excersize:")):
     return toDoList[excercise_id]
 
@@ -66,13 +66,13 @@ def update_item(item_id: int, item: UpdateItem):
     if item_id not in toDoList:
         return {"Error": "Item does not exist"}
     if item.name != None:
-        toDoList[item_id]["Excercize name"] = item.name
+        toDoList[item_id]["name"] = item.name
 
     if item.reps != None:
-        toDoList[item_id]["Number of sets"] = item.reps
+        toDoList[item_id]["sets"] = item.reps
 
     if item.sets != None:
-        toDoList[item_id]["number of reps"] = item.sets
+        toDoList[item_id]["reps"] = item.sets
 
     return toDoList[item_id]
 @app.delete("/delete")
