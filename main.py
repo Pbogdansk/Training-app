@@ -21,7 +21,7 @@ class UpdateItem(BaseModel):
 
 toDoList = {
     1: {
-        "Excersize name": "test",
+        "Excercize name": "test",
         "Number of sets": 5,
         "number of reps": 5
     }
@@ -45,16 +45,23 @@ def get_excercize(name: Optional[str] = None):
     return {"Data": "Not found"}
 
 @app.post("/create-item/{item_id}")
-def create_item(item_id: int,item: Item):
+def create_item(item_id: int, item: Item):
     if item_id in toDoList:
         return {"already dodaned"}
 
-    toDoList[item_id] = item#{"name": item.name, "reps": item.reps, "sets": item.sets, "load": item.load}
+    toDoList[item_id] = {"name": item.name, "reps": item.reps, "sets": item.sets, "load": item.load}
     return toDoList[item_id]
 
 @app.put("/update-item/{item_id}")
 def update_item(item_id: int, item: Item):
     if item_id not in toDoList:
         return {"Error": "Item does not exist"}
-    toDoList[item_id].update(item)
+    if item.name != None:
+        toDoList[item_id].name = item.name
+    if item.reps != None:
+        toDoList[item_id].reps = item.reps
+    if item.sets != None:
+        toDoList[item_id].sets = item.sets
+    if item.load != None:
+        toDoList[item_id].load = item.load
     return toDoList[item_id]
