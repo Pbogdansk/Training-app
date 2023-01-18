@@ -37,12 +37,12 @@ def test():
 def get_excercize(excercise_id: int = Path(None, description="The id of the excersize:")):
     return toDoList[excercise_id]
 
-@app.get("/get-by-name")
-def get_excercize(name: Optional[str] = None):
-    for item_id in toDoList:
-        if toDoList[item_id].name == name:
-            return toDoList[item_id]
-    return {"Data": "Not found"}
+#@app.get("/search/{item_id}")
+#def get_excercize(name: Optional[str] = None):
+#    for item_id in toDoList:
+ #       if toDoList[item_id].name == name:
+ #           return toDoList[item_id]
+#    return {"Data": "Not found"}
 
 @app.post("/create-item/{item_id}")
 def create_item(item_id: int, item: Item):
